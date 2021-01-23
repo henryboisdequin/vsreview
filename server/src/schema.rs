@@ -4,6 +4,7 @@ table! {
         content -> Varchar,
         question -> Nullable<Int4>,
         author -> Int4,
+        created_at -> Timestamptz,
     }
 }
 
@@ -21,6 +22,7 @@ table! {
         content -> Varchar,
         tag_list -> Array<Text>,
         author -> Int4,
+        created_at -> Timestamptz,
     }
 }
 
@@ -32,6 +34,7 @@ table! {
         bio -> Text,
         profile_image -> Nullable<Text>,
         password_hash -> Text,
+        created_at -> Timestamptz,
     }
 }
 
@@ -41,4 +44,9 @@ joinable!(likes -> answer (answer));
 joinable!(likes -> user (user));
 joinable!(question -> user (author));
 
-allow_tables_to_appear_in_same_query!(answer, likes, question, user,);
+allow_tables_to_appear_in_same_query!(
+    answer,
+    likes,
+    question,
+    user,
+);
