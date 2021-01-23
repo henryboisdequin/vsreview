@@ -7,6 +7,7 @@ extern crate diesel;
 #[macro_use]
 extern crate rocket_contrib;
 
+mod models;
 mod schema;
 
 use diesel::prelude::*;
@@ -14,8 +15,7 @@ use diesel::{Insertable, Queryable};
 use rocket::response::content::Html;
 use rocket::{get, post, put, routes};
 use rocket_contrib::databases::{database, diesel::PgConnection};
-use rocket_contrib::json::Json;
-use rocket_contrib::json::JsonValue;
+use rocket_contrib::json::{Json, JsonValue};
 use serde::{Deserialize, Serialize};
 
 #[database("postgres")]

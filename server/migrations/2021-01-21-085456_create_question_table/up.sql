@@ -5,5 +5,6 @@ create table question (
     title varchar(80) not null,
     content varchar(1000) not null,
     tag_list text[] not null,
-    author integer not null references "user" on delete cascade
+    author integer not null references "user" on delete cascade,
+    created_at timestamp with time zone not null default now(),
 );
