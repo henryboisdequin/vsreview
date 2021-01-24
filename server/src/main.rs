@@ -9,6 +9,7 @@ extern crate rocket_contrib;
 
 mod models;
 mod schema;
+mod utils;
 
 use diesel::prelude::*;
 use diesel::{Insertable, Queryable};

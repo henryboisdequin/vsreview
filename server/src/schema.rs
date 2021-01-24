@@ -34,7 +34,6 @@ table! {
         bio -> Text,
         profile_image -> Nullable<Text>,
         password_hash -> Text,
-        created_at -> Timestamptz,
     }
 }
 
@@ -44,9 +43,4 @@ joinable!(likes -> answer (answer));
 joinable!(likes -> user (user));
 joinable!(question -> user (author));
 
-allow_tables_to_appear_in_same_query!(
-    answer,
-    likes,
-    question,
-    user,
-);
+allow_tables_to_appear_in_same_query!(answer, likes, question, user);

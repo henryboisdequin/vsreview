@@ -6,6 +6,5 @@ create table "user" (
     email text not null unique,
     bio text not null,
     profile_image text,
-    password_hash text not null,
-    created_at timestamp with time zone not null default now()
+    password_hash text not null
 );
