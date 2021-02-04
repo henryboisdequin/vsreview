@@ -7,12 +7,14 @@ extern crate diesel;
 #[macro_use]
 extern crate rocket_contrib;
 
+mod db;
+mod error;
 mod models;
+mod routes;
 mod schema;
 mod utils;
 
 use diesel::prelude::*;
-use diesel::{Insertable, Queryable};
 use rocket::response::content::Html;
 use rocket::{get, post, put, routes};
 use rocket_contrib::databases::{database, diesel::PgConnection};

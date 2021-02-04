@@ -1,6 +1,7 @@
 use crate::models::user::User;
 use crate::utils::DATE_FORMAT;
 use chrono::{DateTime, Utc};
+use diesel::Queryable;
 use serde::Serialize;
 
 #[derive(Queryable)]
