@@ -32,7 +32,7 @@ table! {
         username -> Text,
         email -> Text,
         bio -> Text,
-        profile_image -> Nullable<Text>,
+        profile_image -> Text,
         password_hash -> Text,
     }
 }

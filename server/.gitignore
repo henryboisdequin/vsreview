@@ -1,6 +1,4 @@
-debug/
-target/
-
-**/*.rs.bk
-
+out
+dist
+node_modules
 .env

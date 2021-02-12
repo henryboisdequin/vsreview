@@ -8,7 +8,7 @@ pub struct User {
     pub username: String,
     pub email: String,
     pub bio: String,
-    pub profile_image: Option<Url>,
+    pub profile_image: Url,
     #[serde(skip_serializing)]
     pub password_hash: String,
 }
@@ -17,7 +17,7 @@ pub struct User {
 pub struct Profile {
     username: String,
     bio: String,
-    profile_image: Option<Url>,
+    profile_image: Url,
 }
 
 impl User {

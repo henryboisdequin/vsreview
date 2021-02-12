@@ -19,6 +19,7 @@ use rocket::response::content::Html;
 use rocket::{get, post, put, routes};
 use rocket_contrib::databases::{database, diesel::PgConnection};
 use rocket_contrib::json::{Json, JsonValue};
+use routes::*;
 use serde::{Deserialize, Serialize};
 
 #[database("postgres")]

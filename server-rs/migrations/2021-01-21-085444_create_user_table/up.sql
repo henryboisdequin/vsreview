@@ -5,6 +5,6 @@ create table "user" (
     username text not null unique,
     email text not null unique,
     bio text not null,
-    profile_image text,
+    profile_image text not null,
     password_hash text not null
 );
