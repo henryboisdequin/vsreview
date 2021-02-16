@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { Question } from "./Question";
 import { Like } from "./Like";
+import { Answer } from "./Answer";
 
 @Entity()
 export class User extends BaseEntity {
@@ -17,13 +18,16 @@ export class User extends BaseEntity {
   name: string;
 
   @Column("text")
-  profile_picture: string;
+  profilePicture: string;
 
   @Column("text", { unique: true })
   githubId: string;
 
   @OneToMany(() => Question, (q) => q.creator)
   questions: Promise<Question[]>;
+
+  @OneToMany(() => Question, (q) => q.creator)
+  answers: Promise<Answer[]>;
 
   @OneToMany(() => Like, (l) => l.user)
   likes: Promise<Like>;

@@ -29,10 +29,10 @@ export class Question extends BaseEntity {
   creator: Promise<User>;
 
   @ManyToOne(() => Answer, (a) => a.markdown)
-  @JoinColumn({ name: "question" })
+  @JoinColumn({ name: "answers" })
   answers: Promise<Answer[]>;
 
   @ManyToOne(() => Like, (l) => l.question)
-  @JoinColumn({ name: "question" })
+  @JoinColumn({ name: "likes" })
   likes: Promise<Like[]>;
 }

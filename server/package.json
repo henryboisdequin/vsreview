@@ -1,5 +1,5 @@
 {
-  "name": "serve",
+  "name": "server",
   "version": "0.1.0",
   "description": "Server for VSReview.",
   "main": "index.js",

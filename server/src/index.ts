@@ -8,15 +8,12 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { __prod__ } from "./consts";
 import { User } from "./entities/User";
-import { isAuth } from "./middleware/isAuth";
 require("dotenv-safe").config();
-
-// TODO, fix this up
 
 const main = async () => {
   await createConnection({
     type: "postgres",
-    database: "vstodo",
+    database: "vsreview",
     entities: [join(__dirname, "./entities/*.*")],
     username: "postgres",
     password: "postgres",
@@ -38,18 +35,18 @@ const main = async () => {
       {
         clientID: process.env.GITHUB_CLIENT_ID as string,
         clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-        callbackURL: "http://localhost:3002/auth/github/callback",
+        callbackURL: "http://localhost:3000/auth/github/callback",
       },
       async (_, __, profile, cb) => {
         let user = await User.findOne({ where: { githubId: profile.id } });
         if (user) {
           user.name = profile.displayName;
-          user.profile_picture = profile.profileUrl;
+          user.profilePicture = profile.profileUrl;
           await user.save();
         } else {
           user = await User.create({
             name: profile.displayName,
-            profile_picture: profile.profileUrl,
+            profilePicture: profile.profileUrl,
             githubId: profile.id,
           }).save();
         }
@@ -71,41 +68,9 @@ const main = async () => {
     "/auth/github/callback",
     passport.authenticate("github", { session: false }),
     (req: any, res) => {
-      // res.send("Logged in with GitHub.");
-      res.redirect(`http://localhost:54321/auth/${req.user.accessToken}`);
+      res.redirect(`http://localhost:4000/auth/${req.user.accessToken}`);
     }
   );
-
-  app.get("/todo", isAuth, async (req, res) => {
-    const todos = await Todo.find({
-      where: { creatorId: req.userId },
-      order: { id: "DESC" },
-    });
-
-    res.send({ todos });
-  });
-
-  app.post("/todo", isAuth, async (req, res) => {
-    const todo = await Todo.create({
-      text: req.body.text,
-      creatorId: req.userId,
-    }).save();
-    res.send({ todo });
-  });
-
-  app.put("/todo", isAuth, async (req, res) => {
-    const todo = await Todo.findOne(req.body.id);
-    if (!todo) {
-      res.send({ todo: null });
-      return;
-    }
-    if (todo.creatorId !== req.userId) {
-      throw new Error("Cannot edit another user's todos.");
-    }
-    todo.complete = !todo.complete;
-    await todo.save();
-    res.send({ todo });
-  });
 
   app.get("/me", async (req, res) => {
     const authHeader = req.headers.authorization;
